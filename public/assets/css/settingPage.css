@@ -1,0 +1,24 @@
+.input{
+			width: 22rem;
+			height: 1.8rem;
+			margin-bottom: 1rem;
+      
+
+		}
+
+.errMsg{
+			background-color: red;
+			color:white;
+            border-radius: 5px;
+		}
+
+		.errInput {
+  border: 1px solid red !important;
+  outline: none;           /* remove focus outline */
+  box-shadow: none !important; /* remove any shadows */
+}
+.sucrssInput {
+  border: 1px solid green !important;
+  outline: none;           /* remove focus outline */
+  box-shadow: none !important; /* remove any shadows */
+}

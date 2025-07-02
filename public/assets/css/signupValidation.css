@@ -23,3 +23,40 @@
   box-shadow: none !important; /* remove any shadows */
 }
 
+.accountAction{
+	width: 90%;
+	height: 3rem;
+    padding: 10px;
+}
+.accountAction a{
+	color: #333435 ;
+}
+
+.accountAction:hover{
+	background-color: #03102e;
+	border: 1px solid rgb(68, 105, 206);
+	border-radius: 15px;	
+}
+.accountAction:hover a{
+	color: white;
+}
+
+
+.accountActionLogout{
+	width: 90%;
+	height: 3rem;
+    padding: 10px;
+	
+}
+.accountActionLogout a{
+	color: #ca0707 ;
+}
+.accountActionLogout:hover{
+	background-color: #ca0707;
+	border: 1px solid rgb(231, 233, 238);
+	border-radius: 15px;	
+}
+.accountActionLogout:hover a{
+	color: white;
+}
+

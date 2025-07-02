@@ -48,7 +48,7 @@ function nameValid(){
 
 				}else{
 		              
-		              const emailRegex = /^[a-zA-Z0-9$#!%*&_.\s-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+		              const emailRegex = /^[a-zA-Z0-9$#!%*&_.\s-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 		              if(emailRegex.test(email.value)){
 		                    errDiv.innerHTML = "";
 		                    errDiv.classList.remove("errMsg");
@@ -148,7 +148,7 @@ function nameValid(){
 
 				}else{
 		              
-		              const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#@$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/;
+		              const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&*?])[A-Za-z0-9!@#$%&*?]{8,16}$/;
 		              if(passwordRegex.test(password.value)){
 		                    errDiv.innerHTML = "";
 		                    errDiv.classList.remove("errMsg");
@@ -198,7 +198,7 @@ function nameValid(){
 
 				}else{
 		              
-		              const locationRegex = /^[a-zA-Z-,0-9\s]{3,}$/;
+		              const locationRegex = /^[a-zA-Z0-9,\/ -]{3,}$/;
 		              if(locationRegex.test(location.value)){
 		                    errDiv.innerHTML = "";
 		                    errDiv.classList.remove("errMsg");

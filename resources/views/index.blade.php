@@ -54,6 +54,8 @@
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"
         ></script>
+        <!-- font awesome cdn -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
@@ -80,6 +82,17 @@
     </head>
 
     <body>
+        @if(session('message'))
+        <script>alert("{{session('message')}}");</script>
+        @endif
+
+ @if($errors->any())
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $err)
+            <li>{{ $err }}</li>
+            @endforeach
+        </div>
+        @endif
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS NAVBAR SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
         <div class="border-bottom">
             <div class="bg-light py-1">
@@ -367,6 +380,38 @@
                                 </div>
                             <!-- END WISH LIST DIV -->
                             <!-- START SIGN UP  DIV -->
+                             @if(session('session_id'))
+                             <div class="list-inline-item me-5">
+                                    <a
+                                        href="#!"
+                                        class="text-muted"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#userProfileModal"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-user"
+                                        >
+                                            <path
+                                                d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                                            ></path>
+                                            <circle
+                                                cx="12"
+                                                cy="7"
+                                                r="4"
+                                            ></circle>
+                                        </svg>
+                                    </a>
+                                </div>
+                             @else
                                 <div class="list-inline-item me-5">
                                     <a
                                         href="#!"
@@ -397,6 +442,7 @@
                                         </svg>
                                     </a>
                                 </div>
+                                @endif
                               <!-- END SIGN UP  DIV -->
                               <!-- START CART LIST  DIV -->
                                 <div class="list-inline-item me-5 me-lg-0">
@@ -857,7 +903,8 @@
                         ></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="#" enctype="multipart/form-data">
+                        <form method="post" action="{{url('/signup')}}" enctype="multipart/form-data">
+                            @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label"
                                     >Name</label
@@ -949,9 +996,9 @@
                                 <label for="account_type" class="form-label"
                                     >Account type</label
                                 >
-                                <select name="account_type" class="form-control" >
+                                <select name="account_type" class="form-select" >
                                     <option value="">Choose account type</option>
-                                    <option value="buyer">Buyer</option>
+                                    <option value="buyer" selected>Buyer</option>
                                     <option value="seller">Seller</option>
                                     <option value="both">Both</option>
                                 </select>
@@ -987,13 +1034,274 @@
                     </div>
                     <div class="modal-footer border-0 justify-content-center">
                         Already have an account?
-                        <a href="#">Sign in</a>
+                        <a href="#!" class="text-muted" data-bs-toggle="modal"
+                         data-bs-target="#signinModal" >
+                            <strong style="font-weight: 900;color: rgb(7, 167, 7);"
+                            onmouseover="this.style.color='rgb(4, 99, 4)'" onmouseout="this.style.color='rgb(7, 167, 7)'">Sign in</strong>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         <script src="assets/js/vendors/signupValidation.js"></script>
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN UP MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER MODAL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+         @if(isset($userInfo))
+           <div
+            class="modal fade"
+            id="userProfileModal"
+            tabindex="-1"
+            aria-labelledby="userModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4">
+                    <div class="modal-header border-0">
+        <h5 class="modal-title" id="userModalLabel">Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div  class="profile-heading">
+       <img src="{{$userInfo->image}}" width="150" height="150" style="border-radius: 50%;margin-left:9rem;" >
+       <h2 style="width: 40%;margin: auto;">{{$userInfo->name}}</h2>
+        </div>
+       <br>
+       @if($userInfo->user_type == 'buyer')
+       <div class="actions" style="margin-left: 2rem;">
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bag-shopping"></i>  Orders</a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
+         </div>
+         @else
+           @if($userInfo->user_type == 'seller')
+                <div class="actions" style="margin-left: 2rem;">
+                    <h4 class="accountAction" >
+             <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#addProductModal"
+              style="color: #333435 !important;">
+                <i class="fa-solid fa-plus"></i>  Add product</a></h4>
+              
+            <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-store"></i>  Your products</a></h4>
+
+          
+        <h4 class="accountAction" > 
+            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
+         </div>
+           @else
+                               <div class="actions" style="margin-left: 2rem;">
+                    <h4 class="accountAction" >
+             <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#addProductModal"
+             style="color: #333435 !important;">
+                <i class="fa-solid fa-plus"></i>  Add product</a></h4>
+        
+            <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-store"></i>  Your products</a></h4>
+
+         <h4 class="accountAction" > <a href="#"><i class="fa-solid fa-bag-shopping"></i>  Orders</a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
+         </div>
+           @endif
+         @endif
+     <br>
+         <div class="logout" style="margin-left: 2rem;"><h4 class="accountActionLogout"> 
+            <a href="{{url('/logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></h4></div>
+         </div>
+      </div>
+    </div>
+  </div>
+  @endif
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+       <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN IN MODAL  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+      <div
+            class="modal fade"
+            id="signinModal"
+            tabindex="-1"
+            aria-labelledby="userModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4">
+                    <div class="modal-header border-0">
+        <h5 class="modal-title" id="userModalLabel">Sign In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{url('/signin')}}">
+        @csrf
+        <div class="mb-3">
+            <label for="emailOrPhone" class="form-label">Email or Phone</label>
+                <input type="text" class="form-control passwordInput"
+                       name="emailOrPhone" placeholder="Enter email or phone" oninput="passwordValid()" />
+                                <div class="emailOrPhoneErrDiv"></div>
+                </div>
+         <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control passwordInput"
+                       name="password" placeholder="Enter Password" oninput="passwordValid()" />
+                                <div class="passwordErrDiv"></div>
+                </div>
+        
+          <button type="submit" class="btn btn-primary">Sign In</button>
+    
+      </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN IN MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ADD PRODUCT MODEL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+         
+        <div
+            class="modal fade"
+            id="addProductModal"
+            tabindex="-1"
+            aria-labelledby="userModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4">
+                    <div class="modal-header border-0">
+                        <h5
+                            class="modal-title fs-3 fw-bold"
+                            id="userModalLabel"
+                        >
+                            New product add
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{{url('/signup')}}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="pName" class="form-label"
+                                    >Product name</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control nameInput"
+                                    name="pName"
+                                    placeholder="Enter product Name"
+                                    oninput="nameValid()"
+                                />
+                                <div class=" nameErrDiv"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pDesc" class="form-label"
+                                    >Product description</label
+                                >
+                                <textarea name="pDesc" class="form-control emailInput"
+                                 oninput="emailValid()" placeholder="Enter product description"></textarea>
+                                <div class="emailErrDiv"></div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="pPrice" class="form-label"
+                                    >Product price in rupees</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control phoneInput"
+                                    name="pPrice"
+                                    placeholder="Enter product price"
+                                    oninput="phoneValid()"
+                                />
+                                <div class="phoneErrDiv"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pQuantity" class="form-label"
+                                    >Product quantity</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control phoneInput"
+                                    name="pQuantity"
+                                    placeholder="Enter product quantity"
+                                    oninput="genderValid()"
+                                />
+                                <div class="genderErrDiv"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pCatergory" class="form-label"
+                                    >Categories</label>
+                               <select name="pCatergory" class="form-control phoneInput">
+                                 <option value="">Choose product category</option>
+                                 <option value="1">Electronics</option>
+                                 <option value="2">Fashion</option>
+                                 <option value="3">Furniture</option>
+                               </select>
+                                <div class="locationErrDiv"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pSCatergory" class="form-label"
+                                    >Sub categories</label>
+                               <select name="pSCatergory" class="form-control phoneInput">
+                                 <option value="">Choose product category</option>
+                                 <option value="1">Electronics</option>
+                                 <option value="2">Fashion</option>
+                                 <option value="3">Furniture</option>
+                               </select>
+                                <div class="locationErrDiv"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pImage" class="form-label"
+                                    >Image</label
+                                >
+                                <input
+                                    type="file"
+                                    class="form-control"
+                                    name="pImage"
+                                    placeholder="Upload the product's image"
+                                   
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary formbtn"
+                                type="submit"
+                            >
+                                Product add
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="assets/js/vendors/signupValidation.js"></script>
+        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ADD PRODUCT MODEL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SHOP CART SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
         <div

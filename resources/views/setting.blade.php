@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Mirrored from freshcart.codescandy.com/pages/shop-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Nov 2024 06:08:16 GMT -->
+    <!-- Mirrored from freshcart.codescandy.com/pages/account-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Nov 2024 06:08:47 GMT -->
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
@@ -9,7 +9,7 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta content="Codescandy" name="author" />
-        <title>Shop Wishlist eCommerce HTML Template - FreshCart</title>
+        <title>Settings eCommerce HTML Template - FreshCart</title>
         <!-- Favicon icon-->
         <link
             rel="shortcut icon"
@@ -33,13 +33,19 @@
 
         <!-- Theme CSS -->
         <link rel="stylesheet" href="../assets/css/theme.min.css" />
-
-        <!-- signup validation css -->
-        <link rel="stylesheet" href="assets/css/signupValidation.css" />
         <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"
         ></script>
+
+        <!-- SCRATCH  CSS STYLE -->
+        <link rel="stylesheet" href="../assets/css/settingPage.css" />
+      
+        <!-- SCRATCH STYLE -->
+      <link rel="stylesheet" href="../assets/css/signupValidation.css" />
+       
+  <!-- font awesome cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
@@ -66,6 +72,18 @@
     </head>
 
     <body>
+        @if(session('message'))
+        <script>
+            alert("{{session('message')}}");
+        </script>
+        @endif
+         @if($errors->any())
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $err)
+            <li>{{ $err }}</li>
+            @endforeach
+        </div>
+        @endif
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS NAVBAR SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
         <div class="border-bottom">
             <div class="bg-light py-1">
@@ -243,7 +261,7 @@
                         <div class="col-xxl-2 col-lg-3 col-md-6 col-5">
                             <a
                                 class="navbar-brand d-none d-lg-block"
-                                href="../index.html"
+                                href="index.html"
                             >
                                 <img
                                     src="assets/images/logo/eCom_logo.png"
@@ -253,9 +271,9 @@
                             <div
                                 class="d-flex justify-content-between w-100 d-lg-none"
                             >
-                                <a class="navbar-brand" href="../index.html">
+                                <a class="navbar-brand" href="index.html">
                                     <img
-                                        src="assets/images/logo/eCom_logo.png"
+                                        src="assets/images/logo/freshcart-logo.svg"
                                         alt="eCommerce HTML Template"
                                     />
                                 </a>
@@ -315,11 +333,14 @@
                                 Location
                             </button>
                         </div>
+
+                        <!-- START WISH LIST , SIGN UP, AND CART LIST -->
                         <div class="col-lg-2 col-xxl-2 text-end col-md-6 col-7">
                             <div class="list-inline">
+                                <!-- START WISH LIST DIV -->
                                 <div class="list-inline-item me-5">
                                     <a
-                                        href="shop-wishlist.html"
+                                        href="{{ url('/wishlist') }}"
                                         class="text-muted position-relative"
                                     >
                                         <svg
@@ -348,6 +369,40 @@
                                         </span>
                                     </a>
                                 </div>
+                                <!-- END WISH LIST DIV -->
+                                <!-- START SIGN UP  DIV -->
+                                @if(session('session_id'))
+                                <div class="list-inline-item me-5">
+                                    <a
+                                        href="#!"
+                                        class="text-muted"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#userProfileModal"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-user"
+                                        >
+                                            <path
+                                                d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                                            ></path>
+                                            <circle
+                                                cx="12"
+                                                cy="7"
+                                                r="4"
+                                            ></circle>
+                                        </svg>
+                                    </a>
+                                </div>
+                                @else
                                 <div class="list-inline-item me-5">
                                     <a
                                         href="#!"
@@ -378,6 +433,9 @@
                                         </svg>
                                     </a>
                                 </div>
+                                @endif
+                                <!-- END SIGN UP  DIV -->
+                                <!-- START CART LIST  DIV -->
                                 <div class="list-inline-item me-5 me-lg-0">
                                     <a
                                         class="text-muted position-relative"
@@ -422,6 +480,7 @@
                                         </span>
                                     </a>
                                 </div>
+                                <!-- END CART LIST  DIV -->
                                 <div
                                     class="list-inline-item d-inline-block d-lg-none"
                                 >
@@ -450,6 +509,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- END WISH LIST , SIGN UP, AND CART LIST -->
                     </div>
                 </div>
             </div>
@@ -521,7 +581,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <div class="dropdown me-3 d-none d-lg-block">
                                 <button
                                     class="btn btn-primary px-6"
@@ -610,7 +670,6 @@
                                             >Two Wheeler</a
                                         >
                                     </li>
-                                   
                                 </ul>
                             </div>
                             <div>
@@ -619,14 +678,13 @@
                                         class="nav-item dropdown w-100 w-lg-auto"
                                     >
                                         <a
-                                            class="nav-link "
-                                            href="{{url('/index')}}"
+                                            class="nav-link"
+                                            href="{{ url('/index') }}"
                                             role="button"
                                             >Home</a
-                                        >      
+                                        >
                                     </li>
-                                    
-                                    
+
                                     <li
                                         class="nav-item dropdown w-100 w-lg-auto"
                                     >
@@ -803,12 +861,90 @@
                 </div>
             </nav>
         </div>
+        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS NAVBAR ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER MODAL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+         @if(isset($userInfo))
+           <div
+            class="modal fade"
+            id="userProfileModal"
+            tabindex="-1"
+            aria-labelledby="userModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4">
+                    <div class="modal-header border-0">
+        <h5 class="modal-title" id="userModalLabel">Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div  class="profile-heading">
+       <img src="{{$userInfo->image}}" width="150" height="150" style="border-radius: 50%;margin-left:9rem;" >
+       <h2 style="width: 40%;margin: auto;">{{$userInfo->name}}</h2>
+        </div>
+       <br>
+       @if($userInfo->user_type == 'buyer')
+       <div class="actions" style="margin-left: 2rem;">
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bag-shopping"></i>  Orders</a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
+         </div>
+         @else
+           @if($userInfo->user_type == 'seller')
+                <div class="actions" style="margin-left: 2rem;">
+                    <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-plus"></i>  Add product</a></h4>
+        
+            <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-store"></i>  Your products</a></h4>
 
-<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS NAVBAR ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+          
+        <h4 class="accountAction" > 
+            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
+         </div>
+           @else
+                               <div class="actions" style="margin-left: 2rem;">
+                    <h4 class="accountAction" >
+             <a href="{{url('/productAdd')}}"><i class="fa-solid fa-plus"></i>  Add product</a></h4>
+        
+            <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-store"></i>  Your products</a></h4>
 
-
-        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN UP MODAL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
-         
+         <h4 class="accountAction" > <a href="#"><i class="fa-solid fa-bag-shopping"></i>  Orders</a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
+        <h4 class="accountAction" > 
+            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
+        <h4 class="accountAction" >
+             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
+         </div>
+           @endif
+         @endif
+     <br>
+         <div class="logout" style="margin-left: 2rem;"><h4 class="accountActionLogout"> 
+            <a href="{{url('/logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></h4></div>
+         </div>
+      </div>
+    </div>
+  </div>
+  @endif
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+        <!-- Modal -->
         <div
             class="modal fade"
             id="userModal"
@@ -834,105 +970,36 @@
                         ></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="{{url('/signup')}}" enctype="multipart/form-data">
-                            @csrf
+                        <form class="needs-validation" novalidate>
                             <div class="mb-3">
-                                <label for="name" class="form-label"
+                                <label for="fullName" class="form-label"
                                     >Name</label
                                 >
                                 <input
                                     type="text"
-                                    class="form-control nameInput"
-                                    name="name"
+                                    class="form-control"
+                                    id="fullName"
                                     placeholder="Enter Your Name"
-                                    oninput="nameValid()"
+                                    required
                                 />
-                                <div class=" nameErrDiv"></div>
+                                <div class="invalid-feedback">
+                                    Please enter name.
+                                </div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="email" class="form-label"
                                     >Email address</label
                                 >
                                 <input
                                     type="email"
-                                    class="form-control emailInput"
-                                    name="email"
-                                    placeholder="Enter Email address"
-                                    oninput="emailValid()"
-                                />
-                                <div class="emailErrDiv"></div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="phone" class="form-label"
-                                    >Phone Number</label
-                                >
-                                <input
-                                    type="number"
-                                    class="form-control phoneInput"
-                                    name="phone"
-                                    placeholder="Enter Phone Number"
-                                    oninput="phoneValid()"
-                                />
-                                <div class="phoneErrDiv"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="gender" class="form-label"
-                                    >Gender</label
-                                >
-                                <input
-                                    type="radio"
-                                    class=""
-                                    name="gender"
-                                    value="male"
-                                    oninput="genderValid()"
-                                />Male
-                                <input
-                                    type="radio"
-                                    class=""
-                                    name="gender"
-                                    value="female"
-                                    oninput="genderValid()"
-                                />Female
-                                <div class="genderErrDiv"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="address" class="form-label"
-                                    >Address</label>
-                                <input
-                                    type="text"
-                                    class="form-control locationInput"
-                                    name="address"
-                                    placeholder="Enter Address"
-                                    oninput="locationValid()"
-                                />
-                                <div class="locationErrDiv"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="image" class="form-label"
-                                    >Image</label
-                                >
-                                <input
-                                    type="file"
                                     class="form-control"
-                                    name="image"
-                                    placeholder="Upload a image"
-                                   
+                                    id="email"
+                                    placeholder="Enter Email address"
+                                    required
                                 />
-                            </div>
-                            <div class="mb-3">
-                                <label for="account_type" class="form-label"
-                                    >Account type</label
-                                >
-                                <select name="account_type" class="form-select" >
-                                    <option value="">Choose account type</option>
-                                    <option value="buyer" selected>Buyer</option>
-                                    <option value="seller">Seller</option>
-                                    <option value="both">Both</option>
-                                </select>
+                                <div class="invalid-feedback">
+                                    Please enter email.
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label"
@@ -940,12 +1007,14 @@
                                 >
                                 <input
                                     type="password"
-                                    class="form-control passwordInput"
-                                    name="password"
+                                    class="form-control"
+                                    id="password"
                                     placeholder="Enter Password"
-                                    oninput="passwordValid()"
+                                    required
                                 />
-                                <div class="passwordErrDiv"></div>
+                                <div class="invalid-feedback">
+                                    Please enter password.
+                                </div>
                                 <small class="form-text">
                                     By Signup, you agree to our
                                     <a href="#!">Terms of Service</a>
@@ -956,7 +1025,7 @@
 
                             <button
                                 type="submit"
-                                class="btn btn-primary formbtn"
+                                class="btn btn-primary"
                                 type="submit"
                             >
                                 Sign Up
@@ -970,10 +1039,9 @@
                 </div>
             </div>
         </div>
-        <script src="assets/js/vendors/signupValidation.js"></script>
-        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN UP MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
-        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SHOP CART SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+        <!-- Shop Cart -->
+
         <div
             class="offcanvas offcanvas-end"
             tabindex="-1"
@@ -1589,9 +1657,8 @@
                 </div>
             </div>
         </div>
-    <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SHOP CART ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
-        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS MODAL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+        <!-- Modal -->
         <div
             class="modal fade"
             id="locationModal"
@@ -1718,437 +1785,460 @@
                 </div>
             </div>
         </div>
-        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
         <script src="../assets/js/vendors/validation.js"></script>
 
- <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS WISHLIST  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ACCOUNT DETAILS ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
         <main>
-            <!-- section-->
-            <div class="mt-4">
+            <!-- section -->
+            <section>
+                <!-- container -->
                 <div class="container">
                     <!-- row -->
                     <div class="row">
                         <!-- col -->
                         <div class="col-12">
-                            <!-- breadcrumb -->
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb mb-0">
-                                    <li class="breadcrumb-item">
-                                        <a href="#!">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item">
-                                        <a href="#!">Shop</a>
-                                    </li>
-                                    <li
-                                        class="breadcrumb-item active"
-                                        aria-current="page"
-                                    >
-                                        My Wishlist
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- section -->
-            <section class="mt-8 mb-14">
-                <div class="container">
-                    <!-- row -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="mb-8">
+                            <div
+                                class="d-flex justify-content-between align-items-center d-md-none py-4"
+                            >
                                 <!-- heading -->
-                                <h1 class="mb-1">My Wishlist</h1>
-                                <p>There are 5 products in this wishlist.</p>
+                                <h3 class="fs-5 mb-0">Account Setting</h3>
+                                <!-- button -->
+                                <button
+                                    class="btn btn-outline-gray-400 text-muted d-md-none btn-icon btn-sm ms-3"
+                                    type="button"
+                                    data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasAccount"
+                                    aria-controls="offcanvasAccount"
+                                >
+                                    <i class="bi bi-text-indent-left fs-3"></i>
+                                </button>
                             </div>
-                            <div>
-                                <!-- table -->
-                                <div class="table-responsive">
-                                    <table
-                                        class="table text-nowrap table-with-checkbox"
+                        </div>
+                        <!-- col -->
+                        <div
+                            class="col-lg-3 col-md-4 col-12 border-end d-none d-md-block"
+                        >
+                            <div class="pt-10 pe-lg-10">
+                                <!-- nav -->
+                                <ul
+                                    class="nav flex-column nav-pills nav-pills-dark"
+                                >
+                                 <!-- nav item -->
+                           <li class="nav-item">
+                              <!-- nav link -->
+                              <a class="nav-link" aria-current="page" href="account-orders.html">
+                                 <i class="fa-solid fa-plus"></i>
+                                 Add products
+                              </a>
+                           </li>
+                            <!-- nav item -->
+                           <li class="nav-item">
+                              <!-- nav link -->
+                              <a class="nav-link" aria-current="page" href="account-orders.html">
+                                 <i class="fa-solid fa-store"></i>
+                                 Your products
+                              </a>
+                           </li>
+                                  <!-- nav link -->
+                                      <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            aria-current="page"
+                                            href="account-orders.html"
+                                        >
+                                            <i
+                                                class="feather-icon icon-shopping-bag me-2"
+                                            ></i>
+                                            Your Orders
+                                        </a>
+                                    </li>
+                                    <!-- nav item -->
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link active"
+                                            href="{{url('/setting')}}"
+                                        >
+                                            <i
+                                                class="feather-icon icon-settings me-2"
+                                            ></i>
+                                            Settings
+                                        </a>
+                                    </li>
+                                    <!-- nav item -->
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            href="{{url('/addressSetting')}}"
+                                        >
+                                            <i
+                                                class="feather-icon icon-map-pin me-2"
+                                            ></i>
+                                            Address
+                                        </a>
+                                    </li>
+                                    <!-- nav item -->
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            href="account-payment-method.html"
+                                        >
+                                            <i
+                                                class="feather-icon icon-credit-card me-2"
+                                            ></i>
+                                            Payment Method
+                                        </a>
+                                    </li>
+                                    <!-- nav item -->
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            href="account-notification.html"
+                                        >
+                                            <i
+                                                class="feather-icon icon-bell me-2"
+                                            ></i>
+                                            Notification
+                                        </a>
+                                    </li>
+                                    <!-- nav item -->
+                                    <li class="nav-item">
+                                        <hr />
+                                    </li>
+                                    <!-- nav item -->
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            href="../index.html"
+                                        >
+                                            <i
+                                                class="feather-icon icon-log-out me-2"
+                                            ></i>
+                                            Log out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        @if(isset($userInfo))
+                        <div class="col-lg-9 col-md-8 col-12">
+                            <div class="py-6 p-md-6 p-lg-10">
+                                <div class="mb-6">
+                                    <!-- heading -->
+                                    <h2 class="mb-0">Account Setting</h2>
+                                </div>
+                                <div>
+                                    <!-- heading -->
+                                    <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER NAME,EMAIL,PHONE UPDATE SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+                                    <h5 class="mb-4">Account details</h5>
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <!-- form -->
+                                            <form
+                                                method="post"
+                                                action="{{ url('nepEdit') }}"
+                                            >
+                                                @csrf
+                                                <input
+                                                    type="hidden"
+                                                    name="userId"
+                                                    value="{{$userInfo->user_id}}"
+                                                />
+                                                <!-- input -->
+                                                <div class="mb-3">
+                                                    <label class="form-label"
+                                                        >Name</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        name="name"
+                                                        class="form-control nameInp nameUpdate"
+                                                        value="{{$userInfo->name}}"
+                                                        oninput="nameUpdateValid()"
+                                                    />
+                                                </div>
+                                                 <div class="mb-3 nameEditValErr"></div>
+                                                <!-- input -->
+                                                <div class="mb-3">
+                                                    <label class="form-label"
+                                                        >Email</label
+                                                    >
+                                                    <input
+                                                        type="email"
+                                                        name="email"
+                                                        class="form-control emailInp emailUpdate"
+                                                        value="{{$userInfo->email}}"
+                                                        oninput="emailUpdateValid()"
+                                                    />
+                                                </div>
+                                                <div class="mb-3 emailEditValErr"></div>
+                                                <!-- input -->
+                                                <div class="mb-5">
+                                                    <label class="form-label"
+                                                        >Phone</label
+                                                    >
+                                                    <input
+                                                        type="text"
+                                                        name="phone"
+                                                        class="form-control phoneInp phoneUpdate"
+                                                        value="{{$userInfo->phone}}"
+                                                        oninput="phoneUpdateValid()"
+                                                    />
+                                                </div>
+                                                <div class="mb-3 phoneEditValErr"></div>
+                                                <!-- button -->
+                                                <div class="mb-3">
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-primary saveBtn nepUpdateSaveBtn"
+                                                    >
+                                                        Save Details
+                                                    </button>
+                                                    <button
+                                                        class="btn btn-primary editBtn"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER NAME,EMAIL,PHONE UPDATE ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+                                <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER IMAGE UPDATE  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+                                <hr class="my-10" />
+                                <div class="pe-lg-14">
+                                    <!-- heading -->
+                                    <h5 class="mb-4">
+                                        Current Profile Picture
+                                    </h5>
+                                    <img
+                                        src="{{$userInfo->image}}"
+                                        width="300"
+                                        height="300"
+                                    /><br /><br /><br /><br />
+                                    <form
+                                        method="post"
+                                        action="{{ url('/pImgEdit') }}"
+                                        enctype="multipart/form-data"
                                     >
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>
-                                                    <!-- form check -->
-                                                    <div class="form-check">
-                                                        <!-- input -->
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="checkbox"
-                                                            value=""
-                                                            id="checkAll"
-                                                        />
-                                                        <!-- label -->
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="checkAll"
-                                                        ></label>
-                                                    </div>
-                                                </th>
-                                                <th></th>
-                                                <th>Product</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                                <th>Remove</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    <!-- form check -->
-                                                    <div class="form-check">
-                                                        <!-- input -->
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="checkbox"
-                                                            value=""
-                                                            id="chechboxTwo"
-                                                        />
-                                                        <!-- label -->
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="chechboxTwo"
-                                                        ></label>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="#"
-                                                        ><img
-                                                            src="../assets/images/products/product-img-18.jpg"
-                                                            class="icon-shape icon-xxl"
-                                                            alt=""
-                                                    /></a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div>
-                                                        <h5 class="fs-6 mb-0">
-                                                            <a
-                                                                href="#"
-                                                                class="text-inherit"
-                                                                >Organic
-                                                                Banana</a
-                                                            >
-                                                        </h5>
-                                                        <small>$.98 / lb</small>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    $35.00
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span
-                                                        class="badge bg-success"
-                                                        >In Stock</span
-                                                    >
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div
-                                                        class="btn btn-primary btn-sm"
-                                                    >
-                                                        Add to Cart
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a
-                                                        href="#"
-                                                        class="text-muted"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Delete"
-                                                    >
-                                                        <i
-                                                            class="feather-icon icon-trash-2"
-                                                        ></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    <!-- form check -->
-                                                    <div class="form-check">
-                                                        <!-- input -->
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="checkbox"
-                                                            value=""
-                                                            id="chechboxThree"
-                                                        />
-                                                        <!-- label -->
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="chechboxThree"
-                                                        ></label>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="#"
-                                                        ><img
-                                                            src="../assets/images/products/product-img-17.jpg"
-                                                            class="icon-shape icon-xxl"
-                                                            alt=""
-                                                    /></a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div>
-                                                        <h5 class="fs-6 mb-0">
-                                                            <a
-                                                                href="#"
-                                                                class="text-inherit"
-                                                                >Fresh Kiwi</a
-                                                            >
-                                                        </h5>
-                                                        <small>4 no</small>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    $20.97
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span
-                                                        class="badge bg-danger"
-                                                        >Out of Stock</span
-                                                    >
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div
-                                                        class="btn btn-dark btn-sm"
-                                                    >
-                                                        Contact us
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a
-                                                        href="#"
-                                                        class="text-muted"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Delete"
-                                                    >
-                                                        <i
-                                                            class="feather-icon icon-trash-2"
-                                                        ></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    <!-- form check -->
-                                                    <div class="form-check">
-                                                        <!-- input -->
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="checkbox"
-                                                            value=""
-                                                            id="chechboxFour"
-                                                        />
-                                                        <!-- label -->
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="chechboxFour"
-                                                        ></label>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="#"
-                                                        ><img
-                                                            src="../assets/images/products/product-img-16.jpg"
-                                                            class="icon-shape icon-xxl"
-                                                            alt=""
-                                                    /></a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div>
-                                                        <h5 class="fs-6 mb-0">
-                                                            <a
-                                                                href="#"
-                                                                class="text-inherit"
-                                                                >Golden
-                                                                Pineapple</a
-                                                            >
-                                                        </h5>
-                                                        <small>2 no</small>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    $35.00
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span
-                                                        class="badge bg-success"
-                                                        >In Stock</span
-                                                    >
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div
-                                                        class="btn btn-primary btn-sm"
-                                                    >
-                                                        Add to Cart
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a
-                                                        href="#"
-                                                        class="text-muted"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Delete"
-                                                    >
-                                                        <i
-                                                            class="feather-icon icon-trash-2"
-                                                        ></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    <!-- form check -->
-                                                    <div class="form-check">
-                                                        <!-- input -->
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="checkbox"
-                                                            value=""
-                                                            id="chechboxFive"
-                                                        />
-                                                        <!-- label -->
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="chechboxFive"
-                                                        ></label>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="#"
-                                                        ><img
-                                                            src="../assets/images/products/product-img-19.jpg"
-                                                            class="icon-shape icon-xxl"
-                                                            alt=""
-                                                    /></a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div>
-                                                        <h5 class="fs-6 mb-0">
-                                                            <a
-                                                                href="#"
-                                                                class="text-inherit"
-                                                                >BeatRoot</a
-                                                            >
-                                                        </h5>
-                                                        <small>1 kg</small>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    $29.00
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span
-                                                        class="badge bg-success"
-                                                        >In Stock</span
-                                                    >
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div
-                                                        class="btn btn-primary btn-sm"
-                                                    >
-                                                        Add to Cart
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a
-                                                        href="#"
-                                                        class="text-muted"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Delete"
-                                                    >
-                                                        <i
-                                                            class="feather-icon icon-trash-2"
-                                                        ></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="align-middle">
-                                                    <!-- form check -->
-                                                    <div class="form-check">
-                                                        <!-- input -->
-                                                        <input
-                                                            class="form-check-input"
-                                                            type="checkbox"
-                                                            value=""
-                                                            id="chechboxSix"
-                                                        />
-                                                        <!-- label -->
-                                                        <label
-                                                            class="form-check-label"
-                                                            for="chechboxSix"
-                                                        ></label>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="#"
-                                                        ><img
-                                                            src="../assets/images/products/product-img-15.jpg"
-                                                            class="icon-shape icon-xxl"
-                                                            alt=""
-                                                    /></a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div>
-                                                        <h5 class="fs-6 mb-0">
-                                                            <a
-                                                                href="#"
-                                                                class="text-inherit"
-                                                                >Fresh Apple</a
-                                                            >
-                                                        </h5>
-                                                        <small>2 kg</small>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    $70.00
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span
-                                                        class="badge bg-success"
-                                                        >In Stock</span
-                                                    >
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div
-                                                        class="btn btn-primary btn-sm"
-                                                    >
-                                                        Add to Cart
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a
-                                                        href="#"
-                                                        class="text-muted"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Delete"
-                                                    >
-                                                        <i
-                                                            class="feather-icon icon-trash-2"
-                                                        ></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        @csrf
+                                        <!-- input -->
+                                        <input
+                                            type="hidden"
+                                            name="editId"
+                                            value="{{$userInfo->user_id}}"
+                                        />
+                                        <div class="mb-3 col">
+                                            <label class="form-label"
+                                                >New Profile Picture</label
+                                            >
+                                            <input
+                                                type="file"
+                                                name="image"
+                                                class="form-control picEdtInp"
+                                                placeholder="Choose an image"
+                                            />
+                                        </div>
+                                        <div class="mb-3">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary picEdtBtn"
+                                            >
+                                                Save New Image
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER IMAGE UPDATE ENDING  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+                                <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER PASSWORD UPDATE  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+                                <hr class="my-10" />
+                                <div class="pe-lg-14">
+                                    <!-- heading -->
+                                    <h5 class="mb-4">Password Update</h5>
+                                    <form
+                                        method="post"
+                                        action="{{ url('/passEdit') }}"
+                                    >
+                                        @csrf
+                                        <input
+                                            type="hidden"
+                                            name="editPassId"
+                                            value="{{$userInfo->user_id}}"
+                                        />
+                                        <!-- input -->
+                                        <div class="mb-3 col">
+                                            <label class="form-label"
+                                                >Current Password</label
+                                            >
+                                            <input
+                                                type="password"
+                                                name="currPass"
+                                                class="form-control currPassEditVal"
+                                                placeholder="**********"
+                                            oninput="currPasswordValid()"/>
+                                        </div>
+                                        <div
+                                            class="mb-3 col currPassEditValErr"
+                                        ></div>
+                                        <!-- input -->
+                                        <div class="mb-3 col">
+                                            <label class="form-label"
+                                                >New Password</label
+                                            >
+                                            <input
+                                                type="password"
+                                                name="newPass"
+                                                class="form-control newPassEditVal"
+                                                placeholder="**********"
+                                            oninput="newPasswordValid()"/>
+                                        </div>
+                                        <div
+                                            class="mb-3 col newPassEditValErr"
+                                        ></div>
+                                        <!-- input -->
+                                        <div class="mb-3 col">
+                                            <label class="form-label"
+                                                >Confirm Password</label
+                                            >
+                                            <input
+                                                type="password"
+                                                name="conPass"
+                                                class="form-control conPassEditVal"
+                                                placeholder="**********"
+                                            oninput="conPasswordValid()"/>
+                                        </div>
+                                        <div
+                                            class="mb-3 col conPassEditValErr"
+                                        ></div>
+                                        <!-- input -->
+                                        <div class="col-12">
+                                            <p class="mb-4">
+                                                Can’t remember your current
+                                                password?
+                                                <a href="#"
+                                                    >Reset your password.</a
+                                                >
+                                            </p>
+                                            <button class="btn btn-primary passUpdateSubBtn">
+                                                Save Password
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER PASSWORD UPDATE ENDING  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+                                <hr class="my-10" />
+                                <div>
+                                    <!-- heading -->
+                                    <h5 class="mb-4">Delete Account</h5>
+                                    <p class="mb-2">
+                                        Would you like to delete your account?
+                                    </p>
+                                    <p class="mb-5">
+                                        This account contain 12 orders, Deleting
+                                        your account will remove all the order
+                                        details associated with it.
+                                    </p>
+                                    <!-- btn -->
+                                    <a href="#" class="btn btn-outline-danger"
+                                        >I want to delete my account</a
+                                    >
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </section>
         </main>
- <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS WISHLIST ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+        <script src="/assets/js/vendors/settingPage.js"></script>
+
+        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ACCOUNT DETAILS ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+        <!-- modal -->
+        <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasAccount"
+            aria-labelledby="offcanvasAccountLabel"
+        >
+            <!-- offcanvas header -->
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasAccountLabel">
+                    Offcanvas
+                </h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <!-- offcanvas body -->
+            <div class="offcanvas-body">
+                <ul class="nav flex-column nav-pills nav-pills-dark">
+                    <!-- nav item -->
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            aria-current="page"
+                            href="account-orders.html"
+                        >
+                            <i class="feather-icon icon-shopping-bag me-2"></i>
+                            Your Orders
+                        </a>
+                    </li>
+                    <!-- nav item -->
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="account-settings.html">
+                            <i class="feather-icon icon-settings me-2"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <!-- nav item -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="account-address.html">
+                            <i class="feather-icon icon-map-pin me-2"></i>
+                            Address
+                        </a>
+                    </li>
+                    <!-- nav item -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="account-payment-method.html">
+                            <i class="feather-icon icon-credit-card me-2"></i>
+                            Payment Method
+                        </a>
+                    </li>
+                    <!-- nav item -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="account-notification.html">
+                            <i class="feather-icon icon-bell me-2"></i>
+                            Notification
+                        </a>
+                    </li>
+                </ul>
+                <hr class="my-6" />
+                <div>
+                    <!-- navs -->
+                    <ul class="nav flex-column nav-pills nav-pills-dark">
+                        <!-- nav item -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="feather-icon icon-log-out me-2"></i>
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
         <!-- footer -->
@@ -2563,5 +2653,5 @@
         <script src="../assets/js/theme.min.js"></script>
     </body>
 
-    <!-- Mirrored from freshcart.codescandy.com/pages/shop-wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Nov 2024 06:08:17 GMT -->
+    <!-- Mirrored from freshcart.codescandy.com/pages/account-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Nov 2024 06:08:47 GMT -->
 </html>

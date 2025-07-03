@@ -69,18 +69,35 @@ class UserController extends Controller
 
 
     public function signin(Request $req){
-        $emailOrPhone = $req->input('emailOrPhone');
-        $password = $req->input('password');
+       $emailOrPhone = $req->input('emailOrPhone');
+       $password = $req->input('password');
        $fetchData = DB::table('users')->where('email',$emailOrPhone)->orWhere('phone',$emailOrPhone)->get()->first();
        
            if(empty($fetchData)){
             return redirect('/index')->with('message','User not exists');
-           }else{
+           }
+           else{
             $dbPass = $fetchData->password;
               if(Hash::check($password,$dbPass)){
                 $userId = $fetchData->user_id;
-                $req->session()->put('session_id',$userId);
-                return redirect('/index')->with('message','Logged in successfully!!');
+                $user_Type = $fetchData->user_type;    // New logic add by Sarthak (Buyeer , Seller  & Both) 
+                // if User == Buyer Then no Need to Fetech products Entry Data (Product_Catagory_Subcatagory)
+                if($user_Type === 'seller' || $user_Type === 'both')
+                {
+                  $product_cat = DB::table('categories')->get(); // fetching all data for product listing 
+                  $product_subcat = DB::table('subcategories')->get(); 
+                   
+                  $req->session()->put('session_id',$userId);
+                  $req->session()->put('session_user_type',$user_Type);
+                  // data is too large thats why using session   
+                  $req->session()->put('Category',$product_cat);               
+                  $req->session()->put('Subcat',$product_subcat); 
+//Not Working Cause Data Iss Tooo Large   // return redirect('/index')->with([ 'userInfo' => $fetchData, 'P_Info_1' => $product_cat, 'P_Info_2' => $product_subcat, 'message'  => 'Logged in successfully!!' ]);                  
+                  return redirect('/index')->with([ 'userInfo' => $fetchData, 'message'  => 'Logged in successfully!!' ]); 
+                }else{
+                  return redirect('/index')->with([ 'userInfo' => $fetchData, 'message'  => 'Logged in successfully!!' ]); 
+                }
+                
               }else{
                 return redirect('/index')->with('message','Log in failed!!');
               }

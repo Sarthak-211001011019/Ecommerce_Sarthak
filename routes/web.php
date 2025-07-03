@@ -53,4 +53,7 @@ Route::get('/setPrimaryAddress{user_id}{addIndex}',[UserController::class,'setPr
 
 // SSSSSSSSSSSSSSSSSS PRODUCT SECTION SSSSSSSSSSSSSSSSSSSS
 
+Route::post('/Product_Listing_Rout',[ProducatController::class,'Listing_Product']);   // need to Fx typo for "ProductController" 
+
+
 

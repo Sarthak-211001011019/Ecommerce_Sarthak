@@ -380,7 +380,7 @@
                                 </div>
                             <!-- END WISH LIST DIV -->
                             <!-- START SIGN UP  DIV -->
-                             @if(session('session_id'))
+                             @if(session('session_id'))   <!--If User allready Logged In then Profile Photo Will be Shown--> 
                              <div class="list-inline-item me-5">
                                     <a
                                         href="#!"
@@ -411,7 +411,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                             @else
+                             @else    <!--If User Not Logged in then Profile-Logo Will be Shown-->
                                 <div class="list-inline-item me-5">
                                     <a
                                         href="#!"
@@ -1047,90 +1047,88 @@
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN UP MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER MODAL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
-         @if(isset($userInfo))
-           <div
-            class="modal fade"
-            id="userProfileModal"
-            tabindex="-1"
-            aria-labelledby="userModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content p-4">
-                    <div class="modal-header border-0">
-        <h5 class="modal-title" id="userModalLabel">Account</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <div  class="profile-heading">
-       <img src="{{$userInfo->image}}" width="150" height="150" style="border-radius: 50%;margin-left:9rem;" >
-       <h2 style="width: 40%;margin: auto;">{{$userInfo->name}}</h2>
-        </div>
-       <br>
-       @if($userInfo->user_type == 'buyer')
-       <div class="actions" style="margin-left: 2rem;">
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-bag-shopping"></i>  Orders</a></h4>
-        <h4 class="accountAction" > 
-            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
-        <h4 class="accountAction" > 
-            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
-         </div>
-         @else
-           @if($userInfo->user_type == 'seller')
-                <div class="actions" style="margin-left: 2rem;">
-                    <h4 class="accountAction" >
-             <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#addProductModal"
-              style="color: #333435 !important;">
-                <i class="fa-solid fa-plus"></i>  Add product</a></h4>
-              
-            <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-store"></i>  Your products</a></h4>
+            @if(isset($userInfo))   <!-- If User is Logged In then this <div> will be Shown -->
+            <div class="modal fade"
+                id="userProfileModal"
+                tabindex="-1"
+                aria-labelledby="userModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-4">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="userModalLabel">Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="profile-heading">
+                                <!-- User Image -->
+                                <img src="{{$userInfo->image}}" width="150" height="150"
+                                    style="border-radius: 50%; margin-left: 9rem;">
+                                <!-- User Name -->
+                                <h2 style="width: 40%; margin: auto;">{{$userInfo->name}}</h2>
+                            </div>
+                            <br>
 
-          
-        <h4 class="accountAction" > 
-            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
-        <h4 class="accountAction" > 
-            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
-         </div>
-           @else
-                               <div class="actions" style="margin-left: 2rem;">
-                    <h4 class="accountAction" >
-             <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#addProductModal"
-             style="color: #333435 !important;">
-                <i class="fa-solid fa-plus"></i>  Add product</a></h4>
-        
-            <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-store"></i>  Your products</a></h4>
+                            <!-- Role-based Options -->
+                            @switch($userInfo->user_type)
+                                @case('buyer')
+                                    <div class="actions" style="margin-left: 2rem;">
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-bag-shopping"></i> Your Orders</a></h4>
+                                        <h4 class="accountAction"><a href="{{ url('/setting') }}"><i class="fa-solid fa-gear"></i> Settings</a></h4>
+                                        <h4 class="accountAction"><a href="{{ url('/addressSetting') }}"><i class="fa-solid fa-location-dot"></i> Address</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-bell"></i> Notification</a></h4>
+                                    </div>
+                                    @break
 
-         <h4 class="accountAction" > <a href="#"><i class="fa-solid fa-bag-shopping"></i>  Orders</a></h4>
-        <h4 class="accountAction" > 
-            <a href="{{url('/setting')}}"><i class="fa-solid fa-gear"></i> Settings </a></h4>
-        <h4 class="accountAction" > 
-            <a href="{{url('/addressSetting')}}"><i class="fa-solid fa-location-dot"></i> Address </a></h4>
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method </a></h4>
-        <h4 class="accountAction" >
-             <a href="#"><i class="fa-solid fa-bell"></i> Notification </a> </h4>
-         </div>
-           @endif
-         @endif
-     <br>
-         <div class="logout" style="margin-left: 2rem;"><h4 class="accountActionLogout"> 
-            <a href="{{url('/logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></h4></div>
-         </div>
-      </div>
-    </div>
-  </div>
-  @endif
+                                @case('seller')
+                                    <div class="actions" style="margin-left: 2rem;">
+                                        <h4 class="accountAction">
+                                            <a href="#" class="text-muted" data-bs-toggle="modal" data-bs-target="#addProductModal" style="color: #333435 !important;">
+                                                <i class="fa-solid fa-plus"></i> Add product
+                                            </a>
+                                        </h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-store"></i> Your products</a></h4>
+                                        <h4 class="accountAction"><a href="{{ url('/setting') }}"><i class="fa-solid fa-gear"></i> Settings</a></h4>
+                                        <h4 class="accountAction"><a href="{{ url('/addressSetting') }}"><i class="fa-solid fa-location-dot"></i> Address</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-bell"></i> Notification</a></h4>
+                                    </div>
+                                    @break
+
+                                @case('both')
+                                    <div class="actions" style="margin-left: 2rem;">
+                                        <h4 class="accountAction">
+                                            <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#addProductModal" style="color: #333435 !important;">
+                                                <i class="fa-solid fa-plus"></i> Add product
+                                            </a>
+                                        </h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-store"></i> Your products</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-bag-shopping"></i> Your Orders</a></h4>
+                                        <h4 class="accountAction"><a href="{{ url('/setting') }}"><i class="fa-solid fa-gear"></i> Settings</a></h4>
+                                        <h4 class="accountAction"><a href="{{ url('/addressSetting') }}"><i class="fa-solid fa-location-dot"></i> Address</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-credit-card"></i> Payment Method</a></h4>
+                                        <h4 class="accountAction"><a href="#"><i class="fa-solid fa-bell"></i> Notification</a></h4>
+                                    </div>
+                                    @break
+
+                                @default
+                                    <h4>Login Details Error!</h4>
+                            @endswitch
+
+                            <!-- Logout Option (Always show if user is logged in) -->
+                            <br>
+                            <div class="logout" style="margin-left: 2rem;">
+                                <h4 class="accountActionLogout">
+                                    <a href="{{ url('/logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif    <!--Main If userinfo set-->
+
 <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN IN MODAL  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
@@ -1148,6 +1146,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <!------------     User    Login   Form   ---------->
       <form method="post" action="{{url('/signin')}}">
         @csrf
         <div class="mb-3">
@@ -1174,7 +1173,7 @@
 <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SIGN IN MODAL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
 <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ADD PRODUCT MODEL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
-         
+ @if(isset($userInfo))
         <div
             class="modal fade"
             id="addProductModal"
@@ -1200,43 +1199,54 @@
                         ></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="{{url('/signup')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{url('/Product_Listing_Rout')}}" enctype="multipart/form-data" id="addProductForm">
                             @csrf
                             <div class="mb-3">
-                                <label for="pName" class="form-label"
+                                <label for="Seller_Id" class="form-label"
+                                    >Seller_ID:</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control nameInput"
+                                    name="Seller_ID"
+                                    value = "{{$userInfo->user_id}}"
+                                    readonly
+                                />
+                               
+                                <label for="P_Name" class="form-label"
                                     >Product name</label
                                 >
                                 <input
                                     type="text"
                                     class="form-control nameInput"
-                                    name="pName"
+                                    name="P_Name"
                                     placeholder="Enter product Name"
-                                    oninput="nameValid()"
+                                    oninput="P_NameValid()"
                                 />
-                                <div class=" nameErrDiv"></div>
+                                <div class=" nameErrDiv"> @error('P_Name') {{ $message }} @enderror </div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="pDesc" class="form-label"
+                                <label for="P_Desc" class="form-label"
                                     >Product description</label
                                 >
-                                <textarea name="pDesc" class="form-control emailInput"
-                                 oninput="emailValid()" placeholder="Enter product description"></textarea>
-                                <div class="emailErrDiv"></div>
+                                <textarea name="P_Desc" class="form-control emailInput"
+                                 oninput="P_DescValid()" placeholder="Enter product description"></textarea>
+                                <div class="descErrDiv">  @error('P_Desc') {{ $message }} @enderror </div>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="pPrice" class="form-label"
+                                <label for="P_Price" class="form-label"
                                     >Product price in rupees</label
                                 >
                                 <input
                                     type="number"
                                     class="form-control phoneInput"
-                                    name="pPrice"
+                                    name="P_Price"
                                     placeholder="Enter product price"
-                                    oninput="phoneValid()"
+                                    oninput="P_PriceValid()"
                                 />
-                                <div class="phoneErrDiv"></div>
+                                <div class="priceErrDiv"> @error('P_Price') {{ $message }} @enderror </div>
                             </div>
 
                             <div class="mb-3">
@@ -1246,46 +1256,51 @@
                                 <input
                                     type="number"
                                     class="form-control phoneInput"
-                                    name="pQuantity"
+                                    name="P_Qty"
                                     placeholder="Enter product quantity"
-                                    oninput="genderValid()"
+                                    oninput="P_QtyValid()"
                                 />
-                                <div class="genderErrDiv"></div>
+                                <div class="qtyErrDiv">  @error('P_Qty') {{ $message }} @enderror </div>
+                            </div>
+
+                         <div class="mb-3">
+                                <label for="P_Category" class="form-label">Choose Product Categories</label>
+                                <select name="P_Category" class="form-control phoneInput" required>
+                                    <option value="" disabled selected>-- Select Category --</option>
+                                    @if(session()->has('Category'))
+                                        @foreach(session('Category') as $Cat)
+                                            <option value="{{ $Cat->category_id }}">{{ $Cat->category_name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
 
                             <div class="mb-3">
-                                <label for="pCatergory" class="form-label"
-                                    >Categories</label>
-                               <select name="pCatergory" class="form-control phoneInput">
-                                 <option value="">Choose product category</option>
-                                 <option value="1">Electronics</option>
-                                 <option value="2">Fashion</option>
-                                 <option value="3">Furniture</option>
-                               </select>
-                                <div class="locationErrDiv"></div>
+                                <label for="P_SubCategory" class="form-label">Sub Categories</label>
+                                <select name="P_SubCategory" class="form-control phoneInput" required>
+                                    <option value="" disabled selected>-- Select Subcategory --</option>
+                                    @if(session()->has('Subcat'))
+                                        @foreach(session('Subcat') as $Subcat)
+                                            <option value="{{ $Subcat->subCategory_id }}">{{ $Subcat->subCategory_name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
+
+
                             <div class="mb-3">
-                                <label for="pSCatergory" class="form-label"
-                                    >Sub categories</label>
-                               <select name="pSCatergory" class="form-control phoneInput">
-                                 <option value="">Choose product category</option>
-                                 <option value="1">Electronics</option>
-                                 <option value="2">Fashion</option>
-                                 <option value="3">Furniture</option>
-                               </select>
-                                <div class="locationErrDiv"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pImage" class="form-label"
+                                <label for="P_Image" class="form-label"
                                     >Image</label
                                 >
                                 <input
                                     type="file"
                                     class="form-control"
-                                    name="pImage"
+                                    name="P_Image"
                                     placeholder="Upload the product's image"
-                                   
+                                    oninput="P_ImgValid()"
+                                    require
                                 />
+                                <div class="ImgErrDiv"> @error('P_Image') {{ $message }} @enderror </div>
                             </div>
 
                             <button
@@ -1300,7 +1315,9 @@
                 </div>
             </div>
         </div>
-        <script src="assets/js/vendors/signupValidation.js"></script>
+        @endif      <!--product category Entry Close-->
+        <link rel="stylesheet" href="assets\css\Product_Validation.css"> 
+        <script src="assets\js\vendors\Product_Valiadation.js"></script>
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ADD PRODUCT MODEL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS SHOP CART SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
@@ -4856,3 +4873,4 @@
 
     <!-- Mirrored from freshcart.codescandy.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Nov 2024 06:08:12 GMT -->
 </html>
+

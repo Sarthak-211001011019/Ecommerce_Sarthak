@@ -1658,7 +1658,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+       <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS LOCATION MODEL  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
         <div
             class="modal fade"
             id="locationModal"
@@ -1787,8 +1787,10 @@
         </div>
 
         <script src="../assets/js/vendors/validation.js"></script>
+         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS LOCATION MODEL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
 
-        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ACCOUNT DETAILS ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ACCOUNT DETAILS  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+          @if(isset($userInfo))
         <main>
             <!-- section -->
             <section>
@@ -1796,6 +1798,7 @@
                 <div class="container">
                     <!-- row -->
                     <div class="row">
+    <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS LEFT SIDE PANEL  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
                         <!-- col -->
                         <div class="col-12">
                             <div
@@ -1825,6 +1828,7 @@
                                     class="nav flex-column nav-pills nav-pills-dark"
                                 >
                                  <!-- nav item -->
+            @if($userInfo->user_type == 'seller' || $userInfo->user_type == 'both')
                            <li class="nav-item">
                               <!-- nav link -->
                               <a class="nav-link" aria-current="page" href="account-orders.html">
@@ -1840,6 +1844,7 @@
                                  Your products
                               </a>
                            </li>
+                           @endif
                                   <!-- nav link -->
                                       <li class="nav-item">
                                         <a
@@ -1920,7 +1925,8 @@
                                 </ul>
                             </div>
                         </div>
-                        @if(isset($userInfo))
+            <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS LEFT SIDE PANEL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
+                       
                         <div class="col-lg-9 col-md-8 col-12">
                             <div class="py-6 p-md-6 p-lg-10">
                                 <div class="mb-6">
@@ -1929,7 +1935,7 @@
                                 </div>
                                 <div>
                                     <!-- heading -->
-                                    <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER NAME,EMAIL,PHONE UPDATE SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+     <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS USER NAME,EMAIL,PHONE UPDATE SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
                                     <h5 class="mb-4">Account details</h5>
                                     <div class="row">
                                         <div class="col-lg-5">
@@ -2149,24 +2155,25 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                       
                     </div>
                 </div>
             </section>
         </main>
+         @endif
         <script src="/assets/js/vendors/settingPage.js"></script>
 
         <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ACCOUNT DETAILS ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
 
         <!-- modal -->
-        <div
+        <!-- <div
             class="offcanvas offcanvas-start"
             tabindex="-1"
             id="offcanvasAccount"
             aria-labelledby="offcanvasAccountLabel"
-        >
+        > -->
             <!-- offcanvas header -->
-            <div class="offcanvas-header">
+            <!-- <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasAccountLabel">
                     Offcanvas
                 </h5>
@@ -2176,12 +2183,12 @@
                     data-bs-dismiss="offcanvas"
                     aria-label="Close"
                 ></button>
-            </div>
+            </div> -->
             <!-- offcanvas body -->
-            <div class="offcanvas-body">
-                <ul class="nav flex-column nav-pills nav-pills-dark">
+            <!-- <div class="offcanvas-body">
+                <ul class="nav flex-column nav-pills nav-pills-dark"> -->
                     <!-- nav item -->
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a
                             class="nav-link"
                             aria-current="page"
@@ -2191,45 +2198,45 @@
                             Your Orders
                         </a>
                     </li>
-                    <!-- nav item -->
+                    nav item -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" href="account-settings.html">
                             <i class="feather-icon icon-settings me-2"></i>
                             Settings
                         </a>
-                    </li>
+                    </li> -->
                     <!-- nav item -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="account-address.html">
                             <i class="feather-icon icon-map-pin me-2"></i>
                             Address
                         </a>
-                    </li>
+                    </li> -->
                     <!-- nav item -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="account-payment-method.html">
                             <i class="feather-icon icon-credit-card me-2"></i>
                             Payment Method
                         </a>
-                    </li>
+                    </li> -->
                     <!-- nav item -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="account-notification.html">
                             <i class="feather-icon icon-bell me-2"></i>
                             Notification
                         </a>
                     </li>
-                </ul>
-                <hr class="my-6" />
-                <div>
+                </ul> -->
+                <!-- <hr class="my-6" />
+                <div> -->
                     <!-- navs -->
-                    <ul class="nav flex-column nav-pills nav-pills-dark">
+                    <!-- <ul class="nav flex-column nav-pills nav-pills-dark"> -->
                         <!-- nav item -->
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="../index.html">
                                 <i class="feather-icon icon-log-out me-2"></i>
                                 Log out
@@ -2238,8 +2245,8 @@
                     </ul>
                 </div>
             </div>
-        </div>
-
+        </div> -->
+<!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS FOOTER STARTING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
         <!-- Footer -->
         <!-- footer -->
         <footer class="footer">

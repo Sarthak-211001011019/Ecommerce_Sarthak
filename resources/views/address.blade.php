@@ -1274,6 +1274,7 @@
       <script src="../assets/js/vendors/validation.js"></script>
 
 <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS HERO SECTION SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
+ @if(isset($allData))
       <main>
          <!-- section -->
          <section>
@@ -1304,6 +1305,7 @@
                         <!-- nav -->
                         <ul class="nav flex-column nav-pills nav-pills-dark">
                             <!-- nav item -->
+             @if($allData->user_type == 'seller' || $allData->user_type == 'both')
                            <li class="nav-item">
                               <!-- nav link -->
                               <a class="nav-link" aria-current="page" href="account-orders.html">
@@ -1319,6 +1321,7 @@
                                  Your products
                               </a>
                            </li>
+                           @endif
                            <!-- nav item -->
                            <li class="nav-item">
                               <!-- nav link -->
@@ -1370,7 +1373,7 @@
                      </div>
                   </div>
     <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS LEFT SIDE PANEL ENDING SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
-@if(isset($allData))
+
       <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSS ADDRESS SECTION SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS --> 
        
                   @php
@@ -1421,11 +1424,16 @@
                                  </div>
                               </div>
                            </div>
+
+                     @if($allData->allAddresses == null)
+                       @else
                            @php
                             $i = 2;
                             $j = 0;
                             @endphp
                     @foreach($addArr as $add)
+
+                       @if($add !== "")
 
                            <div class="col-xk-5 col-lg-6 col-xxl-4 col-12 mb-4">
                               <!-- input -->
@@ -1466,8 +1474,10 @@
                                  </div>
                               </div>
                            </div>
+                           @endif
                             @php $j++; @endphp
                            @endforeach
+                           @endif
                         </div>
                      </div>
                   </div>

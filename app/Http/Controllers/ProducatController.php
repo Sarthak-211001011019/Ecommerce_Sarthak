@@ -46,17 +46,17 @@ class ProducatController extends Controller
                           'product_qty' => $Product_qty,
                           'product_qty' => $Product_qty,
                           'category_id' => $Product_cat,
-                          'subcategory_id' => $Product_subcat,
-                          'product_image' => $P_upload_path.'/'.$P_file_name
+                          'subcategory_id' => $Product_subcat, 
+                          'product_image' => $P_upload_path.'/'.$P_file_name 
                        ]; 
 
         $product_List = DB::table('products')->insert($Data_Insert);
         if($product_List){
-            return response()->json(['message'=>'Product Listed !']);
-            // return redirect('/index')->with('message','Product Listing Sucess !');
+            // return response()->json(['message'=>'Product Listed !']);
+            return redirect('/index')->with('message','Product Listing Sucess !');
         }else{
-            // return redirect('/index')->with('message','Product Listing Failed !');
-            return response()->json(['message'=>'Product Not Inserted !']);
+            return redirect('/index')->with('message','Product Listing Failed !');
+            // return response()->json(['message'=>'Product Not Inserted !']);
         }
     }
     

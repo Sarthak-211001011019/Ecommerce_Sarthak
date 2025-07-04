@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProducatController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,6 +55,13 @@ Route::get('/setPrimaryAddress{user_id}{addIndex}',[UserController::class,'setPr
 // SSSSSSSSSSSSSSSSSS PRODUCT SECTION SSSSSSSSSSSSSSSSSSSS
 
 Route::post('/Product_Listing_Rout',[ProducatController::class,'Listing_Product']);   // need to Fx typo for "ProductController" 
+Route::get('/Listed_Product{S_id}',[ProducatController::class,'ViewListed_Product']); 
 
+
+
+
+// SSSSSSSSSSSSSSSSSSSSSS   Signin For Admin/User   SSSSSSSSSSSSSSSSSSS
+Route::get('/Admin_signup',[AdminController::class,'Signup_Page']);
+Route::get('/signin_rout',[AdminController::class,'Signin_Page']);
 
 

@@ -1272,7 +1272,7 @@
                                             <option value="{{ $Cat->category_id }}">{{ $Cat->category_name }}</option>
                                         @endforeach
                                     @endif
-                                </select>
+                                </select>  
                             </div>
 
                             <div class="mb-3">

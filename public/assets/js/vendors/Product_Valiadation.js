@@ -58,9 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
             err.classList.add('error-text');
             priceInput.classList.add('input-error');
             isValid = false;
-        } else if (isNaN(priceValue) || priceValue <= 49) {
+        } else if (isNaN(priceValue) || priceValue <= 100) {
             const err = document.querySelector('.priceErrDiv');
-            err.innerText = "Product price must be greater than 49.";
+            err.innerText = "Product price must be greater than 100.";
             err.classList.add('error-text');
             priceInput.classList.add('input-error');
             isValid = false;

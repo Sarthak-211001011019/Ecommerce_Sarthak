@@ -1223,7 +1223,7 @@
                                     placeholder="Enter product Name"
                                     oninput="P_NameValid()"
                                 />
-                                <div class=" nameErrDiv"> @error('P_Name') {{ $message }} @enderror </div>
+                                <div class="nameErrDiv"></div> @error('P_Name') {{ $message }} @enderror </div>
                             </div>
 
                             <div class="mb-3">

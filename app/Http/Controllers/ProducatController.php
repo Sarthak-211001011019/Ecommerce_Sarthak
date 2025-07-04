@@ -14,7 +14,7 @@ class ProducatController extends Controller
             'Seller_ID'       => 'required|numeric|exists:users,user_id',
             'P_Name'          => 'required|string|max:255',
             'P_Desc'          => 'required|string',
-            'P_Price'         => 'required|numeric|min:0.01',
+            'P_Price'         => 'required|numeric|min:50.00',
             'P_Qty'           => 'required|integer|min:10',
             'P_Category'     => 'required|exists:categories,category_id',
             'P_SubCategory'   => 'required|exists:subcategories,subCategory_id',
